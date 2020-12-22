@@ -286,6 +286,51 @@ class SecretServer:
                     )
         return secret
 
+    
+    def lookup_secrets_json(
+        self, 
+        text: str = None, 
+        field: str = None,
+        include_inactive: bool = None,
+        include_restricted: bool = None,
+        template_id: int = None,
+        folder_id: int = None,
+        include_subfolders: bool = None,
+        take: int = 20):
+        """Lookup a secret in Secret Server
+
+        :param 
+        """
+
+        self._refresh_access_grant()
+
+        queryparams = {}
+        if text:
+            queryparams['filter.searchText'] = text
+        if field:
+            queryparams['filter.searchField'] = field
+        if include_inactive:
+            queryparams['filter.includeInactive'] = include_inactive
+        if include_restricted:
+            queryparams['filter.includeRestricted'] = include_restricted
+        if template_id:
+            queryparams['filter.secretTemplateId'] = template_id
+        if folder_id:
+            queryparams['filter.folderId'] = folder_id
+        if include_subfolders:
+            queryparams['filter.includeSubFolders'] = include_subfolders
+        queryparams['take'] = take
+        
+        return self.process(
+            requests.get(
+                f"{self.api_url}/secrets/lookup", params=queryparams, headers=self._add_authorization_header()
+            )
+        ).text
+
+    def lookup_secrets(self, ):
+        """
+
+        """
 
 class SecretServerCloud(SecretServer):
     """ A class that uses bearer token authentication to access the Secret Server
