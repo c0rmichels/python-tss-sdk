@@ -22,7 +22,7 @@ if __name__ == "__main__":
     #     print(error.message)
 
     try:
-        secrets_dict = json.loads(secret_server.lookup_secrets_json(text='antwerpen'))
+        secrets_dict = json.loads(secret_server.lookup_secrets_json(text='antwerpen', take=10))
         print(json.dumps(secrets_dict))
         print(secrets_dict['total'])
     except SecretServerAccessError as error:
