@@ -299,7 +299,29 @@ class SecretServer:
         take: int = 20):
         """Lookup a secret in Secret Server
 
-        :param 
+        :param text: the text to be searched for
+        :type text: str
+        :param field: the field where the text is to be searched for
+        :type field: str
+        :param include_inactive: whether to include inactive secrets in the search
+        :type include_inactive: bool
+        :param include_restricted: whether to include restricted secrets in the search
+        :type include_restricted: bool
+        :param template_id: only return secrets based on this template_id
+        :type template_id: int
+        :param folder_id: only search secrets in this folder
+        :type folder_id: int
+        :param include_subfolders: include subfolders of folder_id in the search
+        :type include_subfolders: bool
+        :param take: maximum amount of secrets to return (default 20)
+        :type take: int
+
+        :return: a JSON formatted string representation of the secret query and resultset
+        :rtype: ``str``
+        :raise: :class:`SecretServerAccessError` when the caller does not have
+                permission to access the secret
+        :raise: :class:`SecretServerError` when the REST API call fails for
+                any other reason
         """
 
         self._refresh_access_grant()

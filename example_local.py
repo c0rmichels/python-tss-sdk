@@ -9,7 +9,7 @@ from thycotic.secrets.server import (
 
 if __name__ == "__main__":
 
-    with open("test_local.json") as f:
+    with open("test/test_local.json") as f:
         secret_server = SecretServer(**json.load(f))
 
     # try:
