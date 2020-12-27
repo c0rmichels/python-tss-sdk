@@ -30,5 +30,5 @@ if __name__ == "__main__":
     except SecretServerError as error:
         print(error.message)
 
-    for secret in secrets_dict['records']:
-        print(json.dumps(secret))
+    for secret_stub in secrets_dict['records']:
+        print(json.dumps(secret_stub))
